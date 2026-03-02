@@ -59,7 +59,7 @@ npm link
 4. 「**通知を許可**」をオンにする
 5. 通知スタイルを「**バナー**」または「**通知**」に設定
 
-<img width="600" alt="通知設定の例" src="https://user-images.githubusercontent.com/placeholder/notification-settings.png">
+<img width="490" height="555" alt="通知設定の例" src="https://github.com/user-attachments/assets/586fc2a9-fb3f-46c7-9237-db1691c9757e" />
 
 **注意**: `terminal-notifier` は `node-notifier` が内部で使用する通知アプリです。
 
