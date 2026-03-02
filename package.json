@@ -1,0 +1,29 @@
+{
+  "name": "git-watch",
+  "version": "0.1.0",
+  "description": "Git リポジトリの upstream 更新を定期的に検知し、通知する CLI ツール",
+  "type": "module",
+  "bin": {
+    "git-watch": "./bin/git-watch.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test --experimental-test-coverage",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "git",
+    "watch",
+    "upstream",
+    "notification"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
