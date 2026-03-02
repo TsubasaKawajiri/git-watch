@@ -19,9 +19,24 @@ Git リポジトリの upstream 更新を定期的に検知し、macOS 通知セ
 
 ## インストール
 
+### 方法 1: GitHub 経由で直接インストール（推奨）
+
+```bash
+# グローバルインストール
+npm install -g git+https://github.com/TsubasaKawajiri/git-watch.git
+
+# または yarn を使う場合
+yarn global add git+https://github.com/TsubasaKawajiri/git-watch.git
+
+# 確認
+git-watch --help
+```
+
+### 方法 2: 手動インストール（開発者向け）
+
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/git-watch.git
+git clone https://github.com/TsubasaKawajiri/git-watch.git
 cd git-watch
 
 # 依存関係をインストール
@@ -30,7 +45,7 @@ npm install
 # ビルド
 npm run build
 
-# グローバルにリンク（オプション）
+# グローバルにリンク
 npm link
 ```
 
