@@ -49,6 +49,20 @@ npm run build
 npm link
 ```
 
+### 初回セットアップ：通知権限の設定
+
+インストール後、**初回起動時に通知権限の設定が必要です**。
+
+1. `git-watch` を一度起動する（通知が表示されなくても OK）
+2. **システム設定** → **通知** を開く
+3. 左側のリストから「**terminal-notifier**」を探す
+4. 「**通知を許可**」をオンにする
+5. 通知スタイルを「**バナー**」または「**通知**」に設定
+
+<img width="600" alt="通知設定の例" src="https://user-images.githubusercontent.com/placeholder/notification-settings.png">
+
+**注意**: `terminal-notifier` は `node-notifier` が内部で使用する通知アプリです。
+
 ## 使い方
 
 ### 基本的な使用方法
@@ -107,8 +121,8 @@ Notification sent.
 
 通知内容：
 ```
-Git Watch: Updates available
-3 new commit(s) on origin/main
+タイトル: project (main)
+メッセージ: 3件の新しいコミット
 ```
 
 ### 自動 pull モード
@@ -132,8 +146,8 @@ Successfully pulled changes.
 
 通知内容：
 ```
-Git Watch: Auto-pulled
-Pulled 2 commit(s) from origin/main
+タイトル: project (main)
+メッセージ: 2件の新しいコミットを自動プル
 ```
 
 ### 自動 pull できない場合
@@ -145,13 +159,13 @@ Working tree が dirty な場合：
 Found 1 new commit(s):
 abc1234 chore: update dependencies
 
-Cannot auto-pull: Working tree is not clean. Please commit or stash your changes.
+Cannot auto-pull: 未コミットの変更があります
 ```
 
 通知内容：
 ```
-Git Watch: Updates available (cannot auto-pull)
-Working tree is not clean. Please commit or stash your changes.
+タイトル: project (main)
+メッセージ: 1件の新しいコミット（自動プル不可: 未コミットの変更があります）
 ```
 
 ## 設定ファイル

@@ -1,5 +1,5 @@
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { cwd } from 'node:process';
 import * as git from './git.js';
 import { notify } from './notifier.js';
@@ -100,6 +100,10 @@ export class Watcher {
 
       console.log(`Found ${behind} new commit(s):\n${commitSummary}${moreCommits}\n`);
 
+      // リポジトリ名とブランチ名を取得
+      const repoName = basename(this.repoPath);
+      const currentBranch = await git.getCurrentBranch();
+
       // auto-pull オプションの場合
       if (options.autoPull) {
         const { canPull, reason } = await this.checkAutoPullConditions();
@@ -108,22 +112,22 @@ export class Watcher {
           console.log('Pulling changes...');
           await git.pullFastForward();
           await notify(
-            'Git Watch: Auto-pulled',
-            `Pulled ${behind} commit(s) from ${upstream}`
+            `${repoName} (${currentBranch})`,
+            `${behind}件の新しいコミットを自動プル`
           );
           console.log('Successfully pulled changes.\n');
         } else {
           await notify(
-            'Git Watch: Updates available (cannot auto-pull)',
-            reason || 'Unknown reason'
+            `${repoName} (${currentBranch})`,
+            `${behind}件の新しいコミット（自動プル不可: ${reason}）`
           );
           console.log(`Cannot auto-pull: ${reason}\n`);
         }
       } else {
         // 標準通知
         await notify(
-          'Git Watch: Updates available',
-          `${behind} new commit(s) on ${upstream}`
+          `${repoName} (${currentBranch})`,
+          `${behind}件の新しいコミット`
         );
         console.log('Notification sent.\n');
       }
@@ -153,7 +157,7 @@ export class Watcher {
     if (!isClean) {
       return {
         canPull: false,
-        reason: 'Working tree is not clean. Please commit or stash your changes.'
+        reason: '未コミットの変更があります'
       };
     }
 
@@ -162,7 +166,7 @@ export class Watcher {
     if (!isFastForward) {
       return {
         canPull: false,
-        reason: 'Fast-forward is not possible. Manual merge may be required.'
+        reason: 'Fast-forward できません'
       };
     }
 
